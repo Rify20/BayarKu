@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Dashboard - BayarKu</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { primary:"#137fec" }, fontFamily: { display:["Manrope","sans-serif"] } } }
+    }
+  </script>
+</head>
+
+<body class="bg-[#f6f7f8] font-display min-h-screen px-4 py-10">
+  <div class="max-w-3xl mx-auto">
+    <div class="rounded-2xl bg-white shadow-xl p-6">
+      <h1 class="text-2xl font-extrabold text-[#111418]">Dashboard</h1>
+      <p class="text-sm text-[#617589] mt-1">Ini halaman setelah login.</p>
+
+      <div class="mt-5 rounded-xl border p-4">
+        <p class="text-sm font-bold text-[#111418]">User:</p>
+        <p id="userEmail" class="text-sm text-[#617589]">-</p>
+      </div>
+
+      <div class="mt-5 flex gap-3">
+        <button id="btnLogout" class="rounded-xl bg-primary text-white font-extrabold px-4 py-2.5">Logout</button>
+        <button id="btnSplash" class="rounded-xl border font-bold px-4 py-2.5">Ke Splash</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

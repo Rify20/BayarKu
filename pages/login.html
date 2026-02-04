@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Login - BayarKu</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { primary:"#137fec" }, fontFamily: { display:["Manrope","sans-serif"] } } }
+    }
+  </script>
+</head>
+<body class="bg-[#f6f7f8] font-display min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md rounded-2xl bg-white shadow-xl p-6">
+    <h1 class="text-2xl font-extrabold text-[#111418]">Login BayarKu</h1>
+    <p class="text-sm text-[#617589] mt-1">Masuk pakai email & password (Supabase).</p>
+
+    <div class="mt-5 space-y-3">
+      <div>
+        <label class="text-sm font-bold text-[#111418]">Email</label>
+        <input id="email" class="mt-1 w-full rounded-xl border px-3 py-2" type="email" placeholder="email@domain.com"/>
+      </div>
+      <div>
+        <label class="text-sm font-bold text-[#111418]">Password</label>
+        <input id="password" class="mt-1 w-full rounded-xl border px-3 py-2" type="password" placeholder="••••••••"/>
+      </div>
+
+      <div id="msg" class="hidden text-sm rounded-xl p-3"></div>
+
+      <button id="btnLogin" class="w-full rounded-xl bg-primary text-white font-extrabold py-2.5">Login</button>
+      <button id="btnRegister" class="w-full rounded-xl border border-primary/30 text-primary font-extrabold py-2.5">Register</button>
+      <button id="btnBack" class="w-full rounded-xl border font-bold py-2.5">Kembali ke Splash</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>
