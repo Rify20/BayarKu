@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | BayarKu POS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-white">
+  <div class="w-full max-w-md p-6 border rounded-xl">
+    <h1 class="text-2xl font-extrabold text-blue-600">BayarKu POS</h1>
+    <p class="text-sm text-gray-500 mt-1">Login dulu ya.</p>
+
+    <div class="mt-6 space-y-3">
+      <input id="email" class="w-full rounded-lg border p-3" placeholder="Email" type="email" autocomplete="email">
+      <input id="password" class="w-full rounded-lg border p-3" placeholder="Password (min 6 char)" type="password" autocomplete="current-password">
+      <button id="btnLogin" class="w-full rounded-lg bg-blue-600 text-white py-3 font-bold">Login</button>
+      <button id="btnRegister" class="w-full rounded-lg border py-3 font-bold">Register</button>
+      <p id="msg" class="text-sm text-red-600"></p>
+    </div>
+
+    <p class="mt-6 text-xs text-gray-400">by rifdev</p>
+  </div>
+
+  <script src="../assets/app-login.js"></script>
+</body>
+</html>
