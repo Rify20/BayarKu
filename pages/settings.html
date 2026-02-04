@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Settings &amp; Receipt Template | BayarKu POS</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: { "display": ["Manrope", "sans-serif"] },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Manrope', sans-serif; }
+    .receipt-paper {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      background: #ffffff;
+      position: relative;
+    }
+    .receipt-paper::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(-45deg, transparent 5px, white 5px), linear-gradient(45deg, transparent 5px, white 5px);
+      background-size: 10px 10px;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white transition-colors duration-200">
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#dbe0e6] dark:border-[#2d3a48] bg-white dark:bg-[#1a2633] px-10 py-3 sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <div class="size-8 text-primary">
+        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+        </svg>
+      </div>
+      <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">BayarKu POS</h2>
+    </div>
+
+    <div class="flex flex-1 justify-end gap-8">
+      <nav class="hidden md:flex items-center gap-9">
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Transactions</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Inventory</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+        <a class="text-primary text-sm font-bold" href="#">Settings</a>
+      </nav>
+
+      <div class="flex gap-2">
+        <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+          <span class="material-symbols-outlined">help</span>
+        </button>
+      </div>
+
+      <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-gray-200" data-alt="User profile avatar"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIR6jvYguFFJB2Us8OczkVUePc7e6mnzaCUCq4KYezAA2hqKRrpo439iD6Br5lp1_jDxruD1sh4M5u8njoQC7oc9C5I8Cq4BG6vN9UhGdCAr0zyB9Ot3g6Fj-ssq2VmZgpaJrNCHZ0kgcn5RMjhjf1FBHZ3Fv9h_FJ_bwvgAZZ_YG_4hJtuaYr_xHC-ZCeSWju1EppiEdNFreBrWH5KdqFkHa8NsEWvaB8Gu-F4HmKlqBkZKDpsgtpi2B46tI56zCSNVV58H20uA");'>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-[1440px] mx-auto flex min-h-[calc(100vh-64px)]">
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 border-r border-[#dbe0e6] dark:border-[#2d3a48] bg-white dark:bg-[#1a2633] p-4 flex flex-col justify-between hidden lg:flex">
+      <div class="flex flex-col gap-6">
+        <div class="flex gap-3 items-center px-2">
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-10" data-alt="Store logo placeholder"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUb7BJjoRcpq-8eWLHmZdLxjknaIb2Dv7E2kGbfFBzk7Aofe7H59eaPXS3RxWgZ8XTtMGxbD0tJ261wJ37xT3M8xn-0V57uXb3L52ZmK2-TQXqYHqmfsr1aLtSlnUGSPxJUIwl8rit3OPxZkxsztjGyPhDgpfANj2QrBiwuel1KeEH5xqrdtLd_Bj9dG7tQZig6LskaKgZGiIvqRjUX8cCBN0Xha2Frkrl-uCfHP1miJRlzRsf5amrU209k5Y9J4JNbjtt-1anzg");'>
+          </div>
+          <div class="flex flex-col">
+            <h1 class="text-base font-bold leading-none">Settings</h1>
+            <p class="text-[#617589] text-xs font-normal">rifdev admin portal</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#">
+            <span class="material-symbols-outlined text-[20px]">storefront</span>
+            <p class="text-sm font-medium">Store Profile</p>
+          </a>
+
+          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+            <span class="material-symbols-outlined text-[20px] fill-1">receipt_long</span>
+            <p class="text-sm font-semibold">Receipt Template</p>
+          </a>
+
+          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#">
+            <span class="material-symbols-outlined text-[20px]">payments</span>
+            <p class="text-sm font-medium">Payment Methods</p>
+          </a>
+
+          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#">
+            <span class="material-symbols-outlined text-[20px]">group</span>
+            <p class="text-sm font-medium">Staff &amp; Permissions</p>
+          </a>
+        </div>
+      </div>
+
+      <button class="flex items-center justify-center gap-2 rounded-lg h-11 px-4 border border-red-200 text-red-600 hover:bg-red-50 transition-colors">
+        <span class="material-symbols-outlined text-sm">logout</span>
+        <span class="text-sm font-bold">Logout</span>
+      </button>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark">
+      <!-- Page Heading -->
+      <div class="flex flex-wrap justify-between items-center gap-3 p-8 border-b border-[#dbe0e6] dark:border-[#2d3a48] bg-white dark:bg-[#1a2633]">
+        <div class="flex flex-col gap-1">
+          <p class="text-2xl font-black leading-tight tracking-[-0.033em]">Settings &amp; Receipt Template</p>
+          <p class="text-[#617589] text-sm font-normal">Configure your store details and customize how your receipts look.</p>
+        </div>
+        <div class="flex gap-3">
+          <button id="btnCancel" class="flex items-center justify-center rounded-lg h-10 px-6 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 text-sm font-bold hover:bg-gray-50 transition-colors">
+            Batal
+          </button>
+          <button id="btnSave" class="flex items-center justify-center rounded-lg h-10 px-8 bg-primary text-white text-sm font-bold hover:bg-primary/90 shadow-md shadow-primary/20 transition-all">
+            Simpan
+          </button>
+        </div>
+      </div>
+
+      <!-- Editor & Preview Grid -->
+      <div class="p-8 grid grid-cols-1 xl:grid-cols-12 gap-8 max-w-[1200px]">
+        <!-- Left: Form Controls -->
+        <div class="xl:col-span-7 space-y-8">
+          <!-- Store Profile Section -->
+          <section class="bg-white dark:bg-[#1a2633] rounded-xl border border-[#dbe0e6] dark:border-[#2d3a48] overflow-hidden">
+            <div class="p-6 border-b border-[#dbe0e6] dark:border-[#2d3a48]">
+              <h2 class="text-lg font-bold">Store Profile</h2>
+              <p class="text-sm text-[#617589]">Basic information that appears on the header of your receipt.</p>
+            </div>
+
+            <div class="p-6 space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label class="flex flex-col gap-2">
+                  <span class="text-sm font-semibold text-[#111418] dark:text-gray-300">Store Name</span>
+                  <input id="storeName" class="form-input rounded-lg border-[#dbe0e6] dark:border-[#2d3a48] dark:bg-[#101922] h-12 text-sm focus:ring-primary focus:border-primary" type="text" />
+                </label>
+
+                <label class="flex flex-col gap-2">
+                  <span class="text-sm font-semibold text-[#111418] dark:text-gray-300">Phone Number</span>
+                  <input id="storePhone" class="form-input rounded-lg border-[#dbe0e6] dark:border-[#2d3a48] dark:bg-[#101922] h-12 text-sm focus:ring-primary focus:border-primary" type="text" />
+                </label>
+              </div>
+
+              <label class="flex flex-col gap-2">
+                <span class="text-sm font-semibold text-[#111418] dark:text-gray-300">Store Address</span>
+                <textarea id="storeAddress" class="form-input rounded-lg border-[#dbe0e6] dark:border-[#2d3a48] dark:bg-[#101922] text-sm focus:ring-primary focus:border-primary resize-none" rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <!-- Receipt Template Editor Section -->
+          <section class="bg-white dark:bg-[#1a2633] rounded-xl border border-[#dbe0e6] dark:border-[#2d3a48] overflow-hidden">
+            <div class="p-6 border-b border-[#dbe0e6] dark:border-[#2d3a48]">
+              <h2 class="text-lg font-bold">Receipt Template Editor</h2>
+              <p class="text-sm text-[#617589]">Customize messages and tokens for your printed receipts.</p>
+            </div>
+
+            <div class="p-6 space-y-6">
+              <!-- Header Textarea -->
+              <div class="flex flex-col gap-3">
+                <div class="flex justify-between items-end">
+                  <span class="text-sm font-semibold">Header Text</span>
+                  <div class="flex gap-2">
+                    <button data-insert-token="{store_name}" data-target="header" class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-[11px] font-mono text-primary border border-primary/20 hover:bg-primary/10 transition-colors">{store_name}</button>
+                    <button data-insert-token="{date}" data-target="header" class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-[11px] font-mono text-primary border border-primary/20 hover:bg-primary/10 transition-colors">{date}</button>
+                  </div>
+                </div>
+                <textarea id="headerText" class="form-input rounded-lg border-[#dbe0e6] dark:border-[#2d3a48] dark:bg-[#101922] text-sm focus:ring-primary focus:border-primary resize-none" rows="3"></textarea>
+              </div>
+
+              <!-- Footer Textarea -->
+              <div class="flex flex-col gap-3">
+                <div class="flex justify-between items-end">
+                  <span class="text-sm font-semibold">Footer Text</span>
+                  <div class="flex gap-2">
+                    <button data-insert-token="{staff_name}" data-target="footer" class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-[11px] font-mono text-primary border border-primary/20 hover:bg-primary/10 transition-colors">{staff_name}</button>
+                    <button data-insert-token="{thank_you}" data-target="footer" class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-[11px] font-mono text-primary border border-primary/20 hover:bg-primary/10 transition-colors">{thank_you}</button>
+                  </div>
+                </div>
+                <textarea id="footerText" class="form-input rounded-lg border-[#dbe0e6] dark:border-[#2d3a48] dark:bg-[#101922] text-sm focus:ring-primary focus:border-primary resize-none" rows="3"></textarea>
+              </div>
+
+              <!-- Receipt Options -->
+              <div class="pt-4 border-t border-gray-100 dark:border-gray-800 grid grid-cols-2 gap-4">
+                <div class="flex items-center gap-3">
+                  <input id="optShowLogo" class="rounded text-primary focus:ring-primary size-5" type="checkbox"/>
+                  <span class="text-sm">Show Logo</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="optShowTxnId" class="rounded text-primary focus:ring-primary size-5" type="checkbox"/>
+                  <span class="text-sm">Show Transaction ID</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="optCompact" class="rounded text-primary focus:ring-primary size-5" type="checkbox"/>
+                  <span class="text-sm">Compact Mode</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="optPrintQr" class="rounded text-primary focus:ring-primary size-5" type="checkbox"/>
+                  <span class="text-sm">Print QR Code</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right: Live Preview -->
+        <div class="xl:col-span-5 relative">
+          <div class="sticky top-24">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-[#617589]">Live Preview</h3>
+              <span class="flex items-center gap-1.5 text-[11px] text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
+                <span class="size-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                REAL-TIME
+              </span>
+            </div>
+
+            <!-- Paper Receipt Simulation -->
+            <div id="pvPaper" class="receipt-paper w-full max-w-[320px] mx-auto p-8 text-[#111418]">
+              <div class="flex flex-col items-center text-center space-y-4">
+                <div id="pvLogo" class="size-12 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-300">
+                  <span class="material-symbols-outlined">image</span>
+                </div>
+
+                <div class="space-y-1">
+                  <p id="pvStoreName" class="font-bold text-lg uppercase"></p>
+                  <p class="text-[11px] leading-tight">
+                    <span id="pvStoreAddress"></span><br/>
+                    <span id="pvStorePhone"></span>
+                  </p>
+                </div>
+
+                <div class="w-full border-t border-dashed border-gray-300 pt-4 text-left">
+                  <p id="pvHeaderText" class="text-[11px] font-medium text-gray-800 mb-2"></p>
+                </div>
+
+                <!-- Line Items Table Simulation (dummy) -->
+                <div class="w-full space-y-2 py-2 text-[12px] font-mono uppercase">
+                  <div class="flex justify-between border-b border-gray-100 pb-1">
+                    <span>Item Description</span>
+                    <span>Total</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>1x Americano Grande</span>
+                    <span>35.000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>1x Butter Croissant</span>
+                    <span>22.000</span>
+                  </div>
+                  <div class="flex justify-between pt-2 font-bold border-t border-dashed border-gray-300">
+                    <span>SUBTOTAL</span>
+                    <span>57.000</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>TAX (10%)</span>
+                    <span>5.700</span>
+                  </div>
+                  <div class="flex justify-between text-base font-black">
+                    <span>TOTAL</span>
+                    <span>62.700</span>
+                  </div>
+                </div>
+
+                <div class="w-full border-t border-dashed border-gray-300 pt-4 space-y-3">
+                  <p id="pvFooterText" class="text-[11px] text-gray-600 font-medium"></p>
+
+                  <div id="pvQrBlock" class="flex flex-col items-center gap-2 py-2">
+                    <div class="size-16 bg-white border border-gray-200 p-1">
+                      <div class="w-full h-full bg-slate-100 flex items-center justify-center text-[8px] text-slate-400">QR CODE</div>
+                    </div>
+                    <p id="pvTxnBlock" class="text-[10px] font-mono">TXN-09283741</p>
+                  </div>
+                </div>
+
+                <!-- rifdev Watermark -->
+                <div class="mt-4 text-center">
+                  <p class="text-[9px] text-gray-300 uppercase tracking-widest font-bold">Powered by rifdev</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Notification -->
+      <div id="toast" class="fixed bottom-8 right-8 z-[100] hidden">
+        <div class="bg-[#1a2633] text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 border border-primary/30">
+          <div class="bg-primary/20 p-2 rounded-full">
+            <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+          </div>
+          <div>
+            <p id="toastTitle" class="font-bold text-sm">Saved</p>
+            <p id="toastDesc" class="text-xs text-gray-400">Updated.</p>
+          </div>
+          <button id="toastClose" class="ml-4 text-gray-500 hover:text-white" type="button">
+            <span class="material-symbols-outlined text-sm">close</span>
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script type="module" src="../assets/app.js"></script>
+</body>
+</html>
