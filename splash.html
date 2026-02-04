@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>BayarKu POS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: { "primary": "#137fec", "background-light": "#f6f7f8", "background-dark": "#101922" },
+          fontFamily: { "display": ["Manrope", "sans-serif"] },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style> body { font-family: 'Manrope', sans-serif; } </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white">
+  <div class="min-h-screen flex flex-col items-center justify-center px-6">
+    <div class="flex items-center gap-3">
+      <div class="size-12 text-primary">
+        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z" fill="currentColor"></path>
+        </svg>
+      </div>
+      <div>
+        <p class="text-2xl font-black tracking-[-0.03em] leading-tight">BayarKu POS</p>
+        <p class="text-sm text-[#617589]">by rifdev</p>
+      </div>
+    </div>
+
+    <div class="mt-10 w-full max-w-xs">
+      <div class="h-2 rounded-full bg-white/70 dark:bg-white/10 overflow-hidden">
+        <div id="bar" class="h-full bg-primary" style="width:0%"></div>
+      </div>
+      <p class="mt-3 text-center text-xs text-[#617589]">Loading...</p>
+    </div>
+  </div>
+
+  <script>
+    const bar = document.getElementById("bar");
+    let p = 0;
+    const t = setInterval(() => {
+      p += 4;
+      bar.style.width = Math.min(p, 100) + "%";
+      if (p >= 100) {
+        clearInterval(t);
+        window.location.href = "./login.html";
+      }
+    }, 120); // ~3 detik
+  </script>
+</body>
+</html>
