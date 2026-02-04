@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Splash Screen - BayarKu</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    .dot-pulse { display:flex; align-items:center; justify-content:center; gap:8px; }
+    .dot { width:10px; height:10px; background-color:#137fec; border-radius:50%; opacity:0.3; }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    .dot:nth-child(1) { animation: pulse 1.5s infinite ease-in-out; }
+    .dot:nth-child(2) { animation: pulse 1.5s infinite ease-in-out 0.2s; }
+    .dot:nth-child(3) { animation: pulse 1.5s infinite ease-in-out 0.4s; }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display overflow-hidden">
+  <!-- Main Splash Container -->
+  <div class="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden">
+    <!-- Background Accents (Geometric) -->
+    <div class="absolute top-[-5%] left-[-5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[10%] right-[-5%] w-80 h-80 bg-primary/10 rotate-45 rounded-xl"></div>
+    <div class="absolute top-[20%] right-[10%] w-16 h-16 border-4 border-primary/10 rounded-lg"></div>
+
+    <!-- Center Content -->
+    <div class="z-10 flex flex-col items-center">
+      <!-- Logo Section -->
+      <div class="mb-6">
+        <div class="flex items-center justify-center size-24 bg-primary rounded-2xl shadow-xl shadow-primary/20">
+          <svg class="w-14 h-14 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Brand Typography -->
+      <div class="text-center">
+        <h1 class="text-[#111418] dark:text-white tracking-tight text-[48px] font-extrabold leading-tight">
+          BayarKu
+        </h1>
+        <p class="text-[#617589] dark:text-gray-400 text-lg font-medium tracking-wide mt-1">
+          by rifdev
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Loading and Status -->
+    <div class="absolute bottom-16 flex flex-col items-center gap-6 w-full max-w-xs">
+      <!-- Progress Bar -->
+      <div class="w-full px-4">
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-6 justify-between items-end">
+            <p id="statusText" class="text-[#111418] dark:text-gray-200 text-sm font-medium leading-none">
+              Initializing POS System
+            </p>
+            <p id="percentText" class="text-primary text-xs font-bold leading-none">
+              0%
+            </p>
+          </div>
+          <div class="h-1.5 w-full rounded-full bg-[#dbe0e6] dark:bg-gray-700 overflow-hidden">
+            <div id="barFill" class="h-full rounded-full bg-primary" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated Dots -->
+      <div class="dot-pulse">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <!-- Watermark Footer -->
+    <div class="absolute bottom-6 text-center">
+      <p class="text-[#617589]/50 dark:text-gray-500 text-xs uppercase tracking-[0.2em] font-bold">
+        Professional POS Platform v2.4
+      </p>
+    </div>
+  </div>
+
+  <!-- Decorative Corner Accents -->
+  <div class="fixed top-0 left-0 p-10 pointer-events-none opacity-20">
+    <span class="material-symbols-outlined text-primary text-4xl">grid_view</span>
+  </div>
+  <div class="fixed bottom-0 right-0 p-10 pointer-events-none opacity-20">
+    <span class="material-symbols-outlined text-primary text-4xl">payments</span>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ==============================
+    // 1) ISI INI DENGAN DATA SUPABASE KAMU
+    // ==============================
+    const SUPABASE_URL = "PASTE_SUPABASE_URL_DI_SINI";
+    const SUPABASE_ANON_KEY = "PASTE_ANON_PUBLIC_KEY_DI_SINI";
+
+    // Redirect tujuan
+    const TARGET_IF_LOGGED_IN = "dashboard.html";
+    const TARGET_IF_GUEST = "login.html";
+
+    // ==============================
+    // 2) UI Loading (Progress + Status)
+    // ==============================
+    const barFill = document.getElementById("barFill");
+    const percentText = document.getElementById("percentText");
+    const statusText = document.getElementById("statusText");
+
+    const steps = [
+      { p: 10, t: "Initializing POS System" },
+      { p: 25, t: "Loading UI Components" },
+      { p: 45, t: "Checking Session" },
+      { p: 65, t: "Connecting to Supabase" },
+      { p: 85, t: "Preparing Workspace" },
+      { p: 95, t: "Finalizing" },
+    ];
+
+    function setProgress(p) {
+      barFill.style.width = p + "%";
+      percentText.textContent = p + "%";
+
+      // update status text based on progress
+      let current = steps[0].t;
+      for (const s of steps) if (p >= s.p) current = s.t;
+      statusText.textContent = current;
+    }
+
+    // ==============================
+    // 3) Main flow
+    // ==============================
+    (async function main() {
+      // guard biar gak error misterius
+      if (!SUPABASE_URL.startsWith("http") || SUPABASE_ANON_KEY.length < 50) {
+        alert("Supabase URL / ANON KEY belum diisi atau salah. Isi dulu di index.html!");
+        return;
+      }
+
+      // create supabase client
+      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // animasi progress (smooth)
+      const start = performance.now();
+      const duration = 1800; // ms
+      let doneAnim = false;
+
+      function animate(now) {
+        const ratio = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - ratio, 3);
+        const p = Math.max(1, Math.min(99, Math.round(eased * 99)));
+        setProgress(p);
+
+        if (ratio < 1) requestAnimationFrame(animate);
+        else doneAnim = true;
+      }
+      requestAnimationFrame(animate);
+
+      // cek session supabase
+      let session = null;
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        session = data.session;
+      } catch (e) {
+        console.error("Supabase session error:", e);
+        session = null;
+      }
+
+      // tunggu animasi minimal selesai biar gak kedip
+      while (!doneAnim) {
+        await new Promise(r => setTimeout(r, 50));
+      }
+
+      setProgress(100);
+
+      // redirect
+      setTimeout(() => {
+        window.location.href = session ? TARGET_IF_LOGGED_IN : TARGET_IF_GUEST;
+      }, 300);
+    })();
+  </script>
+</body>
+</html>
